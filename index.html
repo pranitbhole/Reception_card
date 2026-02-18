@@ -42,26 +42,19 @@ body {
 
 /* ─────────────────────────────────────────────────────────────
    CURTAIN STAGE
-   True theatrical raise: panels move straight UP like a real
-   stage curtain being lifted into the fly tower, while softly
-   swinging outward (scaleX) at the hem as tension releases.
 ───────────────────────────────────────────────────────────── */
-
-/* Black stage behind the curtain */
 #stage {
   position:fixed; inset:0; z-index:9998;
   background:radial-gradient(ellipse 70% 50% at 50% 80%,
     #1a0505 0%, #0a0101 100%);
 }
 
-/* Curtain wrap — flex row for side-slide */
 #curtain-wrap {
   position:fixed; inset:0; z-index:9999;
   display:flex; overflow:hidden;
   pointer-events:none;
 }
 
-/* Panels slide left/right to open */
 .c-panel {
   position:relative;
   height:100%; width:50%;
@@ -76,14 +69,11 @@ body {
 #curtain-wrap.open .c-panel-l { transform: translateX(-100%); }
 #curtain-wrap.open .c-panel-r { transform: translateX(100%); }
 
-/* Velvet fabric — left */
 .c-panel-l {
   background:
-    /* horizontal satin sheen lines */
     repeating-linear-gradient(180deg,
       transparent 0px, rgba(255,255,255,0.006) 1px,
       transparent 2px, transparent 18px),
-    /* vertical pleat folds */
     repeating-linear-gradient(90deg,
       rgba(0,0,0,0.22)  0%,  rgba(0,0,0,0)     2.5%,
       rgba(255,255,255,0.055) 4%,  rgba(0,0,0,0)  5.5%,
@@ -101,7 +91,6 @@ body {
       rgba(255,255,255,0.06) 84%,  rgba(0,0,0,0)  86%,
       rgba(0,0,0,0.10)  93%,  rgba(0,0,0,0)     95%,
       rgba(0,0,0,0.24) 100%),
-    /* main deep-red velvet colour */
     linear-gradient(170deg,
       var(--velvet-hi) 0%,
       var(--velvet)    18%,
@@ -112,7 +101,6 @@ body {
       var(--velvet-xdk)100%);
 }
 
-/* Right panel — mirror folds */
 .c-panel-r {
   background:
     repeating-linear-gradient(180deg,
@@ -144,7 +132,6 @@ body {
       var(--velvet-hi) 100%);
 }
 
-/* Edge vignette on each panel */
 .c-panel-l::after, .c-panel-r::after {
   content:''; position:absolute; inset:0; pointer-events:none;
 }
@@ -159,7 +146,6 @@ body {
     rgba(0,0,0,.15) 80%, rgba(0,0,0,.6) 100%);
 }
 
-/* Gathered hem at bottom of each panel */
 .c-hem {
   position:absolute; bottom:0; left:0; right:0; height:72px;
   background:
@@ -173,40 +159,28 @@ body {
 
 /* ══════════════════════════════════════════════════════════
    REALISTIC GOLD BULLION FRINGE
-   Sits at the very top of each panel — slides away with it.
-   Structure per panel:
-     .c-fringe
-       .c-fringe-band      ← embroidered velvet header bar
-       .c-fringe-rod       ← round gold hanging rod / cord
-       .c-fringe-tassels   ← flex row of SVG tassels (JS-built)
 ══════════════════════════════════════════════════════════ */
-
-/* Outer wrapper — full width, top of panel, flows with slide */
 .c-fringe {
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 130px;           /* band + rod + tassel drop */
+  height: 130px;
   z-index: 20;
   pointer-events: none;
   overflow: visible;
 }
 
-/* ── Embroidered header band ── */
 .c-fringe-band {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 32px;
   background:
-    /* top sheen */
     linear-gradient(180deg,
       rgba(255,255,255,.22) 0%,
       rgba(255,255,255,.08) 15%,
       transparent 40%),
-    /* subtle embroidery diagonal shimmer */
     repeating-linear-gradient(135deg,
       rgba(255,255,255,.06) 0px, rgba(255,255,255,.06) 1px,
       transparent 1px, transparent 6px),
-    /* velvet-to-gold colour */
     linear-gradient(180deg,
       #4a1510 0%,
       #5a1c14 25%,
@@ -220,7 +194,6 @@ body {
     inset 0 -2px 4px rgba(0,0,0,.5),
     0 4px 12px rgba(0,0,0,.55);
 }
-/* Thin gold accent lines at top and bottom of band */
 .c-fringe-band::before {
   content:'';
   position:absolute; top:0; left:0; right:0; height:2px;
@@ -236,20 +209,16 @@ body {
   box-shadow:0 0 8px rgba(200,160,60,.7);
 }
 
-/* ── Round hanging rod / heavy cord ── */
 .c-fringe-rod {
   position: absolute;
   top: 28px; left: -2px; right: -2px;
   height: 10px;
   border-radius: 5px;
   background:
-    /* specular highlight on top curve */
     radial-gradient(ellipse 60% 35% at 50% 15%,
       rgba(255,255,255,.55) 0%, transparent 80%),
-    /* inner shadow on bottom */
     radial-gradient(ellipse 70% 50% at 50% 95%,
       rgba(0,0,0,.5) 0%, transparent 70%),
-    /* gold tone */
     linear-gradient(180deg,
       #f8e8a8 0%,
       #e8c060 12%,
@@ -263,7 +232,6 @@ body {
     0  8px 24px rgba(0,0,0,.35),
     0 -1px  2px rgba(255,255,255,.15) inset;
 }
-/* Rope-twist marks along rod */
 .c-fringe-rod::after {
   content:'';
   position:absolute; inset:0; border-radius:inherit;
@@ -275,7 +243,6 @@ body {
       rgba(255,255,255,.1) 11px, rgba(255,255,255,.1) 12px);
 }
 
-/* ── Tassel row ── */
 .c-fringe-tassels {
   position: absolute;
   top: 35px; left: 0; right: 0;
@@ -286,7 +253,6 @@ body {
   overflow: visible;
 }
 
-/* Each tassel is an inline SVG injected by JS — just set the swing animation */
 .c-tassel-svg {
   display: block;
   transform-origin: top center;
@@ -302,8 +268,6 @@ body {
   75%     { transform: rotate(calc(var(--dir, 1) *  1.1deg)); }
   90%     { transform: rotate(calc(var(--dir, 1) *  0.3deg)); }
 }
-
-
 
 /* ── CURTAIN CENTRE TEXT ── */
 #curtain-center {
@@ -358,7 +322,6 @@ body {
   animation:riseUp 1s ease 1.25s both;
 }
 
-/* ── NEUMORPHIC CTA BUTTON ── */
 .c-btn-wrap {
   margin-top:52px;
   animation:riseUp 1s ease 1.4s both;
@@ -373,7 +336,6 @@ body {
   color:var(--gold-lt); cursor:pointer;
   background:linear-gradient(155deg,#3c0909 0%,#1c0303 55%,#2d0505 100%);
   border:1px solid rgba(226,201,138,.22);
-  /* neumorphic depth */
   box-shadow:
     8px  8px 20px rgba(0,0,0,.7),
     -4px -4px 12px rgba(255,255,255,.03),
@@ -385,14 +347,12 @@ body {
     letter-spacing .35s ease,
     color .25s ease;
 }
-/* Glass sheen */
 .c-btn::before {
   content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
   background:linear-gradient(140deg,
     rgba(255,255,255,.1) 0%, rgba(226,201,138,.07) 30%,
     transparent 65%);
 }
-/* Shimmer sweep on hover */
 .c-btn::after {
   content:''; position:absolute;
   top:-10%; left:-120%; bottom:-10%; width:60%;
@@ -421,7 +381,6 @@ body {
     inset -1px -1px 4px rgba(255,255,255,.02);
 }
 
-/* gone state — hide curtain elements after open */
 #stage.gone, #curtain-wrap.gone, #curtain-center.gone { display:none; }
 
 /* ─────────────────────────────────────────────────────────────
@@ -454,9 +413,6 @@ body {
 .rd3 { transition-delay:.34s; }
 .rd4 { transition-delay:.46s; }
 
-/* ─────────────────────────────────────────────────────────────
-   MAIN SITE
-───────────────────────────────────────────────────────────── */
 #main-site { opacity:0; transition:opacity 1.4s ease; }
 #main-site.show { opacity:1; }
 
@@ -478,7 +434,6 @@ body {
     linear-gradient(175deg,var(--cream) 0%,var(--parchment) 45%,var(--beige) 100%);
 }
 
-/* Corner bracket ornaments */
 .hero-corner {
   position:absolute; width:90px; height:90px;
   border:1.5px solid rgba(201,169,110,.25); pointer-events:none;
@@ -489,7 +444,6 @@ body {
 .hero-corner-bl { bottom:28px; left:28px; border-right:none; border-top:none; }
 .hero-corner-br { bottom:28px; right:28px; border-left:none; border-top:none; }
 
-/* Ambient floating particles */
 .particle {
   position:absolute; border-radius:50%;
   background:var(--gold); pointer-events:none; opacity:0;
@@ -502,14 +456,12 @@ body {
   100% { opacity:0; transform:translateY(-130px) scale(.1); }
 }
 
-/* Hero text animations */
 .hero-eyebrow {
   font-family:'Jost',sans-serif; font-size:10px;
   letter-spacing:7px; text-transform:uppercase;
   color:var(--gold); font-weight:300;
   animation:fadeInUp 1s ease .2s both;
 }
-
 .hero-names {
   font-family:'Playfair Display',serif;
   font-size:clamp(52px,10.5vw,96px); font-style:italic; font-weight:400;
@@ -530,8 +482,6 @@ body {
   color:var(--text-mid); font-weight:300;
   animation:fadeInUp 1s ease .6s both;
 }
-
-/* Thin gold rule that expands under the date */
 .hero-date-rule {
   width:0; height:1px; margin:10px auto 0;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
@@ -539,7 +489,6 @@ body {
 }
 @keyframes expandW2 { to { width:80px; } }
 
-/* Wedding cake SVG */
 .cake-wrap {
   width:min(280px,80vw);
   animation:fadeInUp 1.4s ease .5s both;
@@ -565,14 +514,11 @@ body {
   font-size:12px; vertical-align:middle; margin:0 14px;
 }
 
-/* ── Countdown card ── */
 .countdown-card {
   max-width:580px; width:100%; border-radius:26px;
   display:flex; align-items:center; justify-content:center;
-  padding:36px 20px;
   animation:fadeInUp 1.2s ease .95s both;
   position:relative; overflow:hidden;
-  /* luxury neumorphic card */
   background:linear-gradient(145deg,var(--cream) 0%,var(--beige) 100%);
   border:1px solid rgba(201,169,110,.22);
   box-shadow:
@@ -581,13 +527,11 @@ body {
     inset 0 1px 0 rgba(255,255,255,.75),
     inset 0 -1px 0 rgba(0,0,0,.05);
 }
-/* Glass highlight */
 .countdown-card::before {
   content:''; position:absolute; inset:0; border-radius:inherit;
   background:linear-gradient(145deg,rgba(255,255,255,.45) 0%,transparent 55%);
   pointer-events:none;
 }
-/* Gold top accent line */
 .countdown-card::after {
   content:''; position:absolute; top:0; left:20%; right:20%; height:2px;
   background:linear-gradient(90deg,transparent,var(--gold-lt),transparent);
@@ -643,15 +587,10 @@ body {
 .ornament::before,.ornament::after {
   content:''; height:1px; flex:1; max-width:90px;
 }
-.ornament::before {
-  background:linear-gradient(90deg,transparent,var(--gold-dk));
-}
-.ornament::after {
-  background:linear-gradient(90deg,var(--gold-dk),transparent);
-}
+.ornament::before { background:linear-gradient(90deg,transparent,var(--gold-dk)); }
+.ornament::after  { background:linear-gradient(90deg,var(--gold-dk),transparent); }
 .ornament span { color:var(--gold); font-size:16px; }
 
-/* Gold top-border rule on each section */
 .s-rule {
   position:absolute; top:0; left:0; right:0; height:3px;
   background:linear-gradient(90deg,
@@ -672,7 +611,6 @@ body {
 }
 .details-inner { max-width:660px; margin:0 auto; }
 
-/* Pulsing pin */
 .pin-wrap {
   width:58px; height:58px;
   background:linear-gradient(135deg,var(--gold-lt),var(--gold-dk));
@@ -700,7 +638,6 @@ body {
   font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic;
   color:var(--gold-dk); letter-spacing:.5px;
 }
-
 .map-box {
   height:300px; border-radius:20px; overflow:hidden;
   position:relative;
@@ -718,10 +655,8 @@ body {
     inset 0 1px 0 rgba(255,255,255,.45);
 }
 .map-box iframe { width:100%; height:100%; border:none; }
-
 .map-btns { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
 
-/* Luxury pill button */
 .pill-btn {
   display:inline-flex; align-items:center; gap:9px;
   padding:16px 32px; border-radius:50px;
@@ -774,7 +709,6 @@ body {
 }
 .program-inner { max-width:1000px; margin:0 auto; }
 
-/* Timeline items — fly-in base */
 .tl-item,.tv-item {
   opacity:0;
   transition:
@@ -787,7 +721,6 @@ body {
 .tv-item:nth-child(even) { transform:translateX(60px); }
 .tl-item.in,.tv-item.in { opacity:1; transform:none; }
 
-/* Horizontal (≥768px) */
 .tl-horiz {
   display:none; align-items:flex-start; justify-content:center;
   margin-top:66px; padding-bottom:10px;
@@ -841,7 +774,6 @@ body {
   color:var(--rose); font-weight:300; text-align:center; padding:0 6px;
 }
 
-/* Vertical (< 768px) */
 .tl-vert {
   display:flex; flex-direction:column;
   max-width:410px; margin:50px auto 0; text-align:left;
@@ -907,51 +839,213 @@ body {
   font-family:'Cormorant Garamond',serif; font-style:italic;
   font-size:21px; color:var(--text);
 }
-.gift-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; }
-.gift-card {
-  border-radius:20px;
-  text-align:center; position:relative; overflow:hidden;
-  background:linear-gradient(148deg,var(--cream) 0%,var(--beige) 100%);
-  border:1px solid rgba(201,169,110,.24);
+
+/* ═════════════════════════════════════════
+   MOMENTS GALLERY — MASONRY
+═════════════════════════════════════════ */
+.section-gallery {
+  position: relative;
+  text-align: center;
+  padding: 80px 24px;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%,
+      rgba(201,169,110,.10) 0%, transparent 65%),
+    linear-gradient(180deg, var(--parchment) 0%, var(--beige) 100%);
+}
+
+.gallery-inner { max-width: 960px; margin: 0 auto; }
+
+/* The masonry grid — CSS columns approach for true masonry */
+.masonry-grid {
+  column-count: 2;
+  column-gap: 22px;
+  margin-top: 0;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 22px;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* Neumorphic card feel matching the rest of the site */
+  background: linear-gradient(148deg, var(--cream) 0%, var(--beige-mid) 100%);
+  border: 1px solid rgba(201,169,110,.28);
   box-shadow:
-    12px 12px 32px rgba(0,0,0,.09),
-    -6px -6px 20px rgba(255,255,255,.9),
-    inset 0 1px 0 rgba(255,255,255,.65);
-  transition:transform .45s cubic-bezier(.34,1.18,.64,1), box-shadow .45s;
+    12px 12px 34px rgba(0,0,0,.11),
+    -5px -5px 18px rgba(255,255,255,.88),
+    inset 0 1px 0 rgba(255,255,255,.7);
+
+  transition: transform .45s cubic-bezier(.34,1.18,.64,1),
+              box-shadow .45s ease;
 }
-.gift-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:3px;
-  border-radius:22px 22px 0 0;
-  background:linear-gradient(90deg,
-    transparent,var(--gold-lt),var(--gold),var(--gold-lt),transparent);
+
+/* Gold top accent line identical to gift cards */
+.masonry-item::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  z-index: 2; border-radius: 24px 24px 0 0;
+  background: linear-gradient(90deg,
+    transparent, var(--gold-lt), var(--gold), var(--gold-lt), transparent);
+  opacity: 0;
+  transition: opacity .4s ease;
 }
-.gift-card::after {
-  content:''; position:absolute; inset:0; border-radius:inherit;
-  background:linear-gradient(148deg,rgba(255,255,255,.38) 0%,transparent 60%);
-  pointer-events:none;
+
+/* Shimmer sweep on hover */
+.masonry-item::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 3; border-radius: inherit;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 55%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
 }
-.gift-card:hover {
-  transform:translateY(-10px) scale(1.025);
+
+.masonry-item:hover {
+  transform: translateY(-8px) scale(1.018);
   box-shadow:
-    18px 24px 50px rgba(140,108,58,.18),
-    -6px -6px 20px rgba(255,255,255,.9),
-    inset 0 1px 0 rgba(255,255,255,.65);
+    18px 22px 48px rgba(140,108,58,.18),
+    -5px -5px 18px rgba(255,255,255,.8),
+    inset 0 1px 0 rgba(255,255,255,.7);
 }
-.gift-icon { font-size:34px; display:block; }
-.gift-title {
-  font-family:'Playfair Display',serif; font-size:20px;
-  font-style:italic; color:var(--ink);
+.masonry-item:hover::before { opacity: 1; }
+.masonry-item:hover::after  { opacity: 1; }
+
+/* The placeholder / image container inside each item */
+.gallery-img {
+  display: block;
+  width: 100%;
+  /* Each card has a fixed aspect ratio for placeholder state */
+  aspect-ratio: var(--ar, 4/3);
+  object-fit: cover;
+  border-radius: inherit;
+  position: relative;
 }
-.gift-text {
-  font-family:'Jost',sans-serif; font-size:12px;
-  line-height:1.9; color:var(--text-mid); font-weight:300;
+
+/* Placeholder state — shown when no real src is set */
+.gallery-placeholder {
+  width: 100%;
+  aspect-ratio: var(--ar, 4/3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: inherit;
+  background:
+    /* subtle noise-like pattern */
+    repeating-linear-gradient(45deg,
+      rgba(201,169,110,.04) 0px, rgba(201,169,110,.04) 1px,
+      transparent 1px, transparent 12px),
+    repeating-linear-gradient(-45deg,
+      rgba(201,169,110,.03) 0px, rgba(201,169,110,.03) 1px,
+      transparent 1px, transparent 12px),
+    linear-gradient(160deg, var(--cream) 0%, var(--beige-mid) 100%);
+  position: relative;
+  overflow: hidden;
 }
-.gift-note {
-  display:inline-block;
-  font-family:'Jost',sans-serif; font-size:9px;
-  letter-spacing:3px; text-transform:uppercase;
-  color:var(--gold-dk);
-  border-bottom:1px solid rgba(140,108,58,.35); padding-bottom:3px;
+
+/* Inner glow ring on placeholder */
+.gallery-placeholder::before {
+  content: '';
+  position: absolute; inset: 16px;
+  border: 1px dashed rgba(201,169,110,.35);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+/* Ornament icon inside placeholder */
+.gallery-ph-icon {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--cream), var(--beige-deep));
+  border: 1.5px solid rgba(201,169,110,.38);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow:
+    6px 6px 16px rgba(0,0,0,.09),
+    -3px -3px 10px rgba(255,255,255,.92),
+    inset 0 1px 0 rgba(255,255,255,.85);
+  font-size: 22px;
+  position: relative; z-index: 1;
+}
+
+.gallery-ph-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-dk); font-weight: 300;
+  position: relative; z-index: 1;
+}
+
+/* Caption strip at bottom of each card */
+.gallery-caption {
+  padding: 16px 20px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.gallery-caption-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-style: italic;
+  color: var(--text-mid); font-weight: 300;
+  text-align: left; line-height: 1.4;
+}
+.gallery-caption-ornament {
+  color: var(--gold);
+  font-size: 13px;
+  flex-shrink: 0;
+  animation: ornamentPulse 3.5s ease-in-out infinite;
+}
+
+/* Lightbox overlay */
+.lightbox {
+  position: fixed; inset: 0; z-index: 99999;
+  background: rgba(10,2,2,.92);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.lightbox.open {
+  opacity: 1; pointer-events: all;
+}
+.lightbox-inner {
+  position: relative;
+  max-width: min(90vw, 900px);
+  max-height: 90vh;
+  border-radius: 26px; overflow: hidden;
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.7),
+    0 0 0 1px rgba(201,169,110,.25);
+  transform: scale(.93);
+  transition: transform .4s cubic-bezier(.34,1.18,.64,1);
+}
+.lightbox.open .lightbox-inner { transform: scale(1); }
+.lightbox-inner img {
+  display: block; width: 100%; height: auto;
+  max-height: 90vh; object-fit: contain;
+}
+/* Gold close button */
+.lightbox-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(145deg, rgba(30,10,5,.8), rgba(10,2,2,.9));
+  border: 1px solid rgba(201,169,110,.35);
+  color: var(--gold-lt); font-size: 18px; line-height: 38px;
+  text-align: center; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,.5);
+  transition: background .25s, transform .25s;
+  z-index: 2;
+}
+.lightbox-close:hover {
+  background: linear-gradient(135deg, var(--gold-lt), var(--gold-dk));
+  color: #fff;
+  transform: scale(1.1) rotate(90deg);
 }
 
 /* ═════════════════════════════════════════
@@ -1035,7 +1129,6 @@ footer::before {
     transparent,var(--gold-dk) 15%,var(--gold-xlt) 50%,var(--gold-dk) 85%,transparent);
   box-shadow:0 0 14px rgba(201,169,110,.45);
 }
-/* Subtle side filigrees */
 footer::after {
   content:''; position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
   width:220px; height:1px;
@@ -1068,65 +1161,51 @@ footer::after {
   font-style:italic; color:rgba(217,201,174,.36); letter-spacing:.5px;
 }
 
-/* ─── SPACING SYSTEM: all sections use same vertical rhythm ─── */
+/* ─── SPACING SYSTEM ─── */
 .section-details,
 .section-program,
 .section-gifts,
+.section-gallery,
 .section-words { padding: 80px 24px; }
 
 footer { padding: 72px 24px 60px; }
 
-/* Section header stack — consistent gaps */
 .s-eyebrow    { margin-bottom: 10px; }
 .s-title      { margin-bottom: 10px; }
 .s-sub        { margin-bottom: 36px; }
 .ornament     { margin-bottom: 40px; }
 
-/* Details section internals */
 .pin-wrap  { margin: 0 auto 24px; }
 .v-name    { margin-bottom: 8px; }
 .v-addr    { margin-bottom: 6px; }
 .v-time    { margin-bottom: 36px; }
 .map-box   { margin-bottom: 24px; }
 
-/* Gifts */
 .gifts-letter { margin-bottom: 40px; }
-.gift-card    { padding: 36px 24px 30px; }
-.gift-icon    { margin-bottom: 16px; }
-.gift-title   { margin-bottom: 12px; }
-.gift-note    { margin-top: 18px; }
 
-/* Words */
 .words-preamble { margin-bottom: 40px; }
 
-/* Hero internal spacing */
 .hero-eyebrow { margin-bottom: 14px; }
 .hero-names   { margin-bottom: 14px; }
 .hero-date    { margin-bottom: 48px; }
 .cake-wrap    { margin: 0 auto 48px; }
 .hero-tagline { margin-bottom: 40px; }
 
-/* Countdown */
 .countdown-card { padding: 32px 20px; }
+.quote-card     { padding: 36px 24px 28px; }
+.q-text         { padding-top: 12px; }
+.q-attr         { margin-top: 16px; }
 
-/* Quote cards */
-.quote-card { padding: 36px 24px 28px; }
-.q-text     { padding-top: 12px; }
-.q-attr     { margin-top: 16px; }
+.footer-stars { margin-bottom: 22px; }
+.footer-names { margin-bottom: 10px; }
+.footer-date  { margin-bottom: 28px; }
+.footer-line  { margin: 0 auto 22px; }
 
-/* Footer */
-.footer-stars  { margin-bottom: 22px; }
-.footer-names  { margin-bottom: 10px; }
-.footer-date   { margin-bottom: 28px; }
-.footer-line   { margin: 0 auto 22px; }
-
-/* Hero padding — tighter, no excess top */
 .hero { padding: 80px 24px 72px; }
-/* ═══════════════════════════════════════════════════════════
-   LUXURY ENHANCEMENT LAYER — Gold shimmer, rich reveals, etc.
-═══════════════════════════════════════════════════════════ */
 
-/* ── Animated gold shimmer on section titles ── */
+/* ═══════════════════════════════════════════════════════════
+   LUXURY ENHANCEMENT LAYER
+═══════════════════════════════════════════════════════════ */
 .s-title {
   background: linear-gradient(
     120deg,
@@ -1145,15 +1224,12 @@ footer { padding: 72px 24px 60px; }
   animation: titleShimmer 6s linear infinite;
   animation-play-state: paused;
 }
-.s-title.vis, .s-title.shimmer-play {
-  animation-play-state: running;
-}
+.s-title.vis, .s-title.shimmer-play { animation-play-state: running; }
 @keyframes titleShimmer {
   0%   { background-position: 200% center; }
   100% { background-position: -50% center; }
 }
 
-/* ── Ornament ✦ pulse ── */
 .ornament span {
   display:inline-block;
   animation: ornamentPulse 3.5s ease-in-out infinite;
@@ -1164,16 +1240,13 @@ footer { padding: 72px 24px 60px; }
             text-shadow:0 0 12px rgba(201,169,110,.7); }
 }
 
-/* ── Gold section divider lines: grow from center on scroll ── */
 .s-rule {
   transform-origin: center;
   transform: scaleX(0);
   transition: transform 1.2s cubic-bezier(.25,.46,.45,.94);
-  
 }
 .s-rule.vis { transform: scaleX(1); }
 
-/* ── Card shimmer sweep on hover (inject via ::before on card elements) ── */
 .gift-card::after,
 .quote-card::after {
   content: '';
@@ -1190,32 +1263,30 @@ footer { padding: 72px 24px 60px; }
 .gift-card:hover::after,
 .quote-card:hover::after { left: 140%; }
 
-/* ── Section backgrounds: subtle animated warm shimmer ── */
 .section-details,
 .section-program,
 .section-gifts,
-.section-words {
-  position: relative;
-}
+.section-gallery,
+.section-words { position: relative; }
+
 .section-details::before,
 .section-program::before,
 .section-gifts::before,
+.section-gallery::before,
 .section-words::before {
   content: '';
   position: absolute; inset: 0;
   background: radial-gradient(ellipse 40% 30% at var(--mx,50%) var(--my,50%),
     rgba(201,169,110,0.06) 0%, transparent 70%);
   pointer-events: none;
-  transition: --mx 0.5s, --my 0.5s;
   z-index: 0;
 }
-/* Content inside sits above the shimmer layer */
 .section-details > *,
 .section-program > *,
 .section-gifts > *,
+.section-gallery > *,
 .section-words > * { position: relative; z-index: 1; }
 
-/* ── Pin icon float animation ── */
 .pin-wrap {
   animation: pinFloat 4s ease-in-out infinite, pinPulse 3.5s ease-in-out infinite 2s;
 }
@@ -1224,7 +1295,6 @@ footer { padding: 72px 24px 60px; }
   50%     { transform: translateY(-6px); }
 }
 
-/* ── Countdown: gold glow on numbers ── */
 .c-num {
   text-shadow: 0 2px 6px rgba(0,0,0,.07);
   transition: text-shadow 0.3s ease;
@@ -1233,9 +1303,6 @@ footer { padding: 72px 24px 60px; }
   text-shadow: 0 0 18px rgba(201,169,110,0.5), 0 2px 6px rgba(0,0,0,.07);
 }
 
-
-
-/* ── Stage spotlight: animated radial glow behind centre text ── */
 #curtain-center::before {
   content: '';
   position: absolute; inset: 0;
@@ -1249,7 +1316,6 @@ footer { padding: 72px 24px 60px; }
   50%     { opacity: 1;   transform: scale(1.05); }
 }
 
-/* ── Hero corner brackets: animated draw-in ── */
 .hero-corner {
   clip-path: polygon(0 0, 0 0, 0 0);
   animation: drawCorner 1s ease var(--cd, 1.5s) forwards;
@@ -1262,7 +1328,6 @@ footer { padding: 72px 24px 60px; }
   to { clip-path: polygon(0 0, 100% 0, 100% 100%); }
 }
 
-/* ── Footer: entrance animation ── */
 footer .footer-names {
   opacity: 0; transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
@@ -1280,7 +1345,6 @@ footer.vis .footer-date,
 footer.vis .footer-quote,
 footer.vis .footer-stars { opacity: 1; transform: none; }
 
-/* ── Timeline: gold connector line grow animation ── */
 .tl-item:not(:last-child)::after {
   transform: scaleX(0);
   transform-origin: left center;
@@ -1288,19 +1352,14 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
 }
 .tl-item.in:not(:last-child)::after { transform: scaleX(1); }
 
-/* ── Pill buttons: gold underline sweep ── */
-.pill-btn {
-  position: relative;
-}
+.pill-btn { position: relative; }
 
-/* ── Gifts section letter fade-in word by word ── */
 .gifts-letter {
   opacity: 0;
   transition: opacity 1.2s ease 0.3s;
 }
 .gifts-letter.vis { opacity: 1; }
 
-/* ── Words preamble: left border grows down ── */
 .words-preamble {
   border-left: 2px solid transparent;
   transition: border-color 0.01s ease;
@@ -1315,7 +1374,6 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
 }
 .words-preamble.vis::before { height: 100%; }
 
-/* ── Cake SVG: warm gold glow when fully drawn ── */
 .cake-wrap svg {
   filter: drop-shadow(0 0 0px rgba(140,108,58,0));
   transition: filter 1.5s ease 3s;
@@ -1325,7 +1383,6 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
   filter: drop-shadow(0 0 10px rgba(140,108,58,0.35));
 }
 
-/* ── Map box: warm top edge shimmer on hover ── */
 .map-box::after {
   content: '';
   position: absolute; top: 0; left: 10%; right: 10%; height: 2px;
@@ -1335,10 +1392,17 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
 }
 .map-box:hover::after { opacity: 1; }
 
+@media(max-width:700px){
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 0;
+  }
+}
 @media(max-width:600px){
   .section-details,
   .section-program,
   .section-gifts,
+  .section-gallery,
   .section-words { padding: 60px 20px; }
   footer { padding: 56px 20px 48px; }
   .hero  { padding: 60px 20px 56px; }
@@ -1346,7 +1410,6 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
   .c-num { font-size:28px; }
   .c-dot { font-size:22px; }
   .map-box { height:220px; border-radius:16px; }
-  .gift-grid  { grid-template-columns:1fr; }
   .quote-grid { grid-template-columns:1fr; }
   .words-preamble { padding-left:16px; }
   .map-btns { flex-direction:column; align-items:center; }
@@ -1372,7 +1435,7 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
 <div id="stage"></div>
 
 <!-- ════════════════════════════════════════════════
-     CURTAIN WRAP (clipping container)
+     CURTAIN WRAP
 ════════════════════════════════════════════════ -->
 <div id="curtain-wrap">
   <div class="c-panel c-panel-l">
@@ -1392,8 +1455,6 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
     <div class="c-hem"></div>
   </div>
 </div>
-
-
 
 <!-- ════════════════════════════════════════════════
      CURTAIN CENTRE TEXT & BUTTON
@@ -1491,10 +1552,10 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
       <p class="s-sub reveal rd2">An evening crafted for you</p>
       <div class="ornament reveal rd3"><span>✦</span></div>
 
-      <div class="pin-wrap reveal rd1 ">📍</div>
+      <div class="pin-wrap reveal rd1">📍</div>
       <p class="v-name reveal rd2">SL Lawns and Resort</p>
-      <p class="v-addr reveal rd2">Badlapur, THane</p>
-      <p class="v-time reveal rd3">Doors open from 6:00 pm · </p>
+      <p class="v-addr reveal rd2">Badlapur, Thane</p>
+      <p class="v-time reveal rd3">Doors open from 6:00 pm ·</p>
 
       <div class="map-box reveal">
         <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=73.203,19.085,73.303,19.185&layer=mapnik&marker=19.1354096,73.2538913" loading="lazy"></iframe>
@@ -1560,11 +1621,82 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
         <em>Dearest guests,</em><br><br>
         Your presence at our reception is the only gift we could ever wish for. Having you
         beside us as we begin this new chapter is a treasure beyond measure.
-        </p>
-      <div class="gift-grid">
-        
-       
-      </div>
+      </p>
+      <div class="gift-grid"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       MOMENTS GALLERY
+  ════════════════════════════════════════════════ -->
+  <div class="section-gallery">
+    <div class="s-rule"></div>
+    <br>
+    <div class="gallery-inner">
+      <p class="s-eyebrow reveal">Our Moments</p>
+      <h2 class="s-title reveal rd1">A Life in Photographs</h2>
+      <p class="s-sub reveal rd2">Glimpses of our journey together</p>
+      <div class="ornament reveal rd3"><span>✦</span></div>
+
+      <div class="masonry-grid">
+
+        <!-- Card 1 — tall portrait -->
+        <div class="masonry-item reveal rd1" data-src="" data-caption="Together, always">
+          <div class="gallery-placeholder" style="--ar:3/4">
+            <div class="gallery-ph-icon">🌸</div>
+            <span class="gallery-ph-label">Your Photo Here</span>
+          </div>
+          <div class="gallery-caption">
+            <span class="gallery-caption-text">Together, always</span>
+            <span class="gallery-caption-ornament">✦</span>
+          </div>
+        </div>
+
+        <!-- Card 2 — wide landscape -->
+        <div class="masonry-item reveal rd2" data-src="" data-caption="The beginning of forever">
+          <div class="gallery-placeholder" style="--ar:4/3">
+            <div class="gallery-ph-icon">💍</div>
+            <span class="gallery-ph-label">Your Photo Here</span>
+          </div>
+          <div class="gallery-caption">
+            <span class="gallery-caption-text">The beginning of forever</span>
+            <span class="gallery-caption-ornament">✦</span>
+          </div>
+        </div>
+
+        <!-- Card 3 — wide landscape -->
+        <div class="masonry-item reveal rd3" data-src="" data-caption="Joy written in every glance">
+          <div class="gallery-placeholder" style="--ar:4/3">
+            <div class="gallery-ph-icon">✨</div>
+            <span class="gallery-ph-label">Your Photo Here</span>
+          </div>
+          <div class="gallery-caption">
+            <span class="gallery-caption-text">Joy written in every glance</span>
+            <span class="gallery-caption-ornament">✦</span>
+          </div>
+        </div>
+
+        <!-- Card 4 — tall portrait -->
+        <div class="masonry-item reveal rd4" data-src="" data-caption="Two hearts, one story">
+          <div class="gallery-placeholder" style="--ar:3/4">
+            <div class="gallery-ph-icon">🕊️</div>
+            <span class="gallery-ph-label">Your Photo Here</span>
+          </div>
+          <div class="gallery-caption">
+            <span class="gallery-caption-text">Two hearts, one story</span>
+            <span class="gallery-caption-ornament">✦</span>
+          </div>
+        </div>
+
+      </div><!-- /masonry-grid -->
+    </div><!-- /gallery-inner -->
+  </div><!-- /section-gallery -->
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+      <img id="lbImg" src="" alt="Gallery photo">
     </div>
   </div>
 
@@ -1583,7 +1715,6 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
         years to come.
         <span class="words-sig">— Siddhi &amp; Akash</span>
       </p>
-     
     </div>
   </div>
 
@@ -1604,208 +1735,104 @@ footer.vis .footer-stars { opacity: 1; transform: none; }
 
 <script>
 
-
 /* ══════════════════════════════════════════════════════
    BUILD REALISTIC GOLD BULLION TASSELS (SVG per tassel)
-   Each tassel = cap loop + wrapped knot + fan of threads + teardrop tip
-   All drawn in SVG so shading, gradients & shadows are pixel-perfect.
 ══════════════════════════════════════════════════════ */
 (function(){
   const NS = 'http://www.w3.org/2000/svg';
-
-  /* Helper: create SVG element with attrs */
   function el(tag, attrs){
     const e = document.createElementNS(NS, tag);
     for(const k in attrs) e.setAttribute(k, attrs[k]);
     return e;
   }
-
-  /* Build one tassel SVG.
-     w  = tassel total width (px)
-     tl = thread length (px)
-     Returns an <svg> element. */
   function buildTassel(w, tl){
-    const kh   = Math.round(w * 0.6);   /* knot height */
-    const tip  = 14;                     /* teardrop tip height */
-    const total = 4 + kh + tl + tip + 2;/* SVG height */
+    const kh   = Math.round(w * 0.6);
+    const tip  = 14;
+    const total = 4 + kh + tl + tip + 2;
     const mid  = w / 2;
-
-    const svg = el('svg', {
-      width: w, height: total,
-      viewBox: `0 0 ${w} ${total}`,
-      xmlns: NS
-    });
-
-    /* ── defs: gradients ── */
+    const svg = el('svg', { width:w, height:total, viewBox:`0 0 ${w} ${total}`, xmlns:NS });
     const defs = el('defs', {});
-
-    /* Gold radial for cap/knot */
     const gKnot = el('linearGradient', { id:'gk'+w, x1:'0',y1:'0',x2:'1',y2:'0' });
     [['0%','#f8e8b0'],['18%','#e8c060'],['40%','#a87828'],['60%','#d4a840'],['80%','#8c6018'],['100%','#c09030']]
       .forEach(([o,c])=>{ const s=el('stop',{'offset':o,'stop-color':c}); gKnot.appendChild(s); });
-
-    /* Thread gradient (top bright → fade out) */
     const gThread = el('linearGradient', { id:'gt'+w, x1:'0',y1:'0',x2:'0',y2:'1' });
     [['0%','#f0d888',1],['20%','#d4a840',1],['55%','#a07828',1],['80%','#c09030',0.7],['100%','#8c6018',0]]
-      .forEach(([o,c,op])=>{
-        const s=el('stop',{'offset':o,'stop-color':c,'stop-opacity':op});
-        gThread.appendChild(s);
-      });
-
-    /* Bright thread (alternating) */
+      .forEach(([o,c,op])=>{ const s=el('stop',{'offset':o,'stop-color':c,'stop-opacity':op}); gThread.appendChild(s); });
     const gThread2 = el('linearGradient', { id:'gt2'+w, x1:'0',y1:'0',x2:'0',y2:'1' });
     [['0%','#fff8d0',1],['15%','#f0d060',1],['50%','#c09030',1],['85%','#a07020',0.6],['100%','#7a5010',0]]
-      .forEach(([o,c,op])=>{
-        const s=el('stop',{'offset':o,'stop-color':c,'stop-opacity':op});
-        gThread2.appendChild(s);
-      });
-
-    /* Tip teardrop */
+      .forEach(([o,c,op])=>{ const s=el('stop',{'offset':o,'stop-color':c,'stop-opacity':op}); gThread2.appendChild(s); });
     const gTip = el('radialGradient', { id:'gtip'+w, cx:'40%',cy:'30%',r:'60%' });
     [['0%','#f8e890'],['40%','#c09030'],['100%','#7a5010']]
       .forEach(([o,c])=>{ const s=el('stop',{'offset':o,'stop-color':c}); gTip.appendChild(s); });
-
-    defs.appendChild(gKnot);
-    defs.appendChild(gThread);
-    defs.appendChild(gThread2);
-    defs.appendChild(gTip);
+    defs.appendChild(gKnot); defs.appendChild(gThread); defs.appendChild(gThread2); defs.appendChild(gTip);
     svg.appendChild(defs);
-
-    /* ── Cap loop (rounded bump at very top, hooks over rod) ── */
     const loopH = 4;
-    const cap = el('ellipse', {
-      cx: mid, cy: loopH,
-      rx: w*0.35, ry: loopH,
-      fill: `url(#gk${w})`
-    });
-    svg.appendChild(cap);
-
-    /* ── Wrapped knot body ── */
-    const knotY = loopH * 2 - 1;
-    const knot = el('rect', {
-      x: w*0.12, y: knotY,
-      width: w*0.76, height: kh,
-      rx: 2, ry: 2,
-      fill: `url(#gk${w})`
-    });
-    svg.appendChild(knot);
-
-    /* Knot horizontal wrap lines (texture) */
+    svg.appendChild(el('ellipse',{ cx:mid, cy:loopH, rx:w*0.35, ry:loopH, fill:`url(#gk${w})` }));
+    const knotY = loopH*2-1;
+    svg.appendChild(el('rect',{ x:w*0.12, y:knotY, width:w*0.76, height:kh, rx:2, ry:2, fill:`url(#gk${w})` }));
     for(let i=2; i<kh-1; i+=3){
-      const line = el('line', {
-        x1: w*0.12, y1: knotY+i,
-        x2: w*0.88, y2: knotY+i,
-        stroke: 'rgba(0,0,0,0.12)', 'stroke-width':'0.8'
-      });
-      svg.appendChild(line);
+      svg.appendChild(el('line',{ x1:w*0.12, y1:knotY+i, x2:w*0.88, y2:knotY+i, stroke:'rgba(0,0,0,0.12)', 'stroke-width':'0.8' }));
     }
-    /* Knot highlight */
-    const kHi = el('rect', {
-      x: w*0.18, y: knotY+1,
-      width: w*0.28, height: kh-2,
-      rx: 1,
-      fill: 'rgba(255,255,255,0.15)'
-    });
-    svg.appendChild(kHi);
-
-    /* ── Thread fan ── */
-    const threadY = knotY + kh;
-    const nThreads = Math.max(6, Math.round(w / 3));
-    const threadW  = Math.max(1.2, w / nThreads * 0.6);
-    const spread   = w * 0.88;
-    const startX   = (w - spread) / 2;
-
+    svg.appendChild(el('rect',{ x:w*0.18, y:knotY+1, width:w*0.28, height:kh-2, rx:1, fill:'rgba(255,255,255,0.15)' }));
+    const threadY = knotY+kh;
+    const nThreads = Math.max(6, Math.round(w/3));
+    const threadW  = Math.max(1.2, w/nThreads*0.6);
+    const spread   = w*0.88;
+    const startX   = (w-spread)/2;
     for(let i=0; i<nThreads; i++){
-      /* Slight fan spread: centre threads longer, edge threads slightly shorter */
       const frac = i/(nThreads-1);
-      const lenMod = 1 - Math.abs(frac - 0.5) * 0.12; /* centre full length */
-      const thisLen = tl * lenMod;
-      const x = startX + frac * spread;
-      /* Tiny horizontal spread at bottom of thread for volume */
-      const dx = (frac - 0.5) * w * 0.35;
-
-      const grad = (i % 3 === 0) ? `gt2${w}` : `gt${w}`;
-      const thread = el('line', {
-        x1: x, y1: threadY,
-        x2: x + dx, y2: threadY + thisLen,
-        stroke: `url(#${grad})`,
-        'stroke-width': threadW,
-        'stroke-linecap': 'round'
-      });
-      svg.appendChild(thread);
+      const thisLen = tl*(1-Math.abs(frac-0.5)*0.12);
+      const x = startX+frac*spread;
+      const dx = (frac-0.5)*w*0.35;
+      const grad = (i%3===0)?`gt2${w}`:`gt${w}`;
+      svg.appendChild(el('line',{ x1:x, y1:threadY, x2:x+dx, y2:threadY+thisLen, stroke:`url(#${grad})`, 'stroke-width':threadW, 'stroke-linecap':'round' }));
     }
-
-    /* ── Teardrop tip ── */
-    const tipY  = threadY + tl - 2;
-    const tipW2 = w * 0.22;
-    /* Rounded diamond / teardrop path */
-    const tipPath = el('path', {
-      d: `M${mid},${tipY} 
-          C${mid-tipW2},${tipY+tip*0.3} ${mid-tipW2*0.8},${tipY+tip*0.7} ${mid},${tipY+tip}
-          C${mid+tipW2*0.8},${tipY+tip*0.7} ${mid+tipW2},${tipY+tip*0.3} ${mid},${tipY}Z`,
-      fill: `url(#gtip${w})`
-    });
-    svg.appendChild(tipPath);
-    /* Specular highlight on tip */
-    const tipHi = el('ellipse',{
-      cx: mid-tipW2*0.25, cy: tipY+tip*0.25,
-      rx: tipW2*0.3, ry: tip*0.18,
-      fill:'rgba(255,255,255,0.35)'
-    });
-    svg.appendChild(tipHi);
-
+    const tipY  = threadY+tl-2;
+    const tipW2 = w*0.22;
+    svg.appendChild(el('path',{ d:`M${mid},${tipY} C${mid-tipW2},${tipY+tip*0.3} ${mid-tipW2*0.8},${tipY+tip*0.7} ${mid},${tipY+tip} C${mid+tipW2*0.8},${tipY+tip*0.7} ${mid+tipW2},${tipY+tip*0.3} ${mid},${tipY}Z`, fill:`url(#gtip${w})` }));
+    svg.appendChild(el('ellipse',{ cx:mid-tipW2*0.25, cy:tipY+tip*0.25, rx:tipW2*0.3, ry:tip*0.18, fill:'rgba(255,255,255,0.35)' }));
     return svg;
   }
-
-  /* ── Populate both fringe rows ── */
   function buildFringe(containerId){
     const container = document.getElementById(containerId);
     if(!container) return;
-    const panelW    = container.closest('.c-panel').offsetWidth || window.innerWidth/2;
-    const tW        = 22;   /* each tassel total width */
-    const tL        = 72;   /* thread length */
-    const gap       = 4;    /* gap between tassels */
-    const n         = Math.floor(panelW / (tW + gap)) + 1;
-
+    const panelW = container.closest('.c-panel').offsetWidth || window.innerWidth/2;
+    const tW=22, tL=72, gap=4;
+    const n = Math.floor(panelW/(tW+gap))+1;
     for(let i=0; i<n; i++){
       const svg = buildTassel(tW, tL);
       svg.classList.add('c-tassel-svg');
-      /* Randomise swing timing and direction for natural look */
-      const dur  = (3.0 + Math.random()*1.8).toFixed(2);
-      const del  = (Math.random()*2.5).toFixed(2);
-      const dir  = (Math.random() > 0.5) ? 1 : -1;
-      svg.style.setProperty('--ts', dur+'s');
-      svg.style.setProperty('--td', del+'s');
-      svg.style.setProperty('--dir', dir);
-      svg.style.marginRight = gap+'px';
+      const dur=(3.0+Math.random()*1.8).toFixed(2);
+      const del=(Math.random()*2.5).toFixed(2);
+      const dir=(Math.random()>0.5)?1:-1;
+      svg.style.setProperty('--ts',dur+'s');
+      svg.style.setProperty('--td',del+'s');
+      svg.style.setProperty('--dir',dir);
+      svg.style.marginRight=gap+'px';
       container.appendChild(svg);
     }
   }
-
-  /* Run on DOM ready */
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){
-      buildFringe('fringe-l');
-      buildFringe('fringe-r');
-    });
-  } else {
-    buildFringe('fringe-l');
-    buildFringe('fringe-r');
-  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){ buildFringe('fringe-l'); buildFringe('fringe-r'); });
+  } else { buildFringe('fringe-l'); buildFringe('fringe-r'); }
 })();
+
+/* ══════════════════════════════════════════
+   HERO PARTICLES
+══════════════════════════════════════════ */
 (function(){
   const field = document.getElementById('particle-field');
   for(let i=0;i<22;i++){
     const p = document.createElement('div');
     p.className = 'particle';
-    const sz = 2 + Math.random()*5;
+    const sz = 2+Math.random()*5;
     Object.assign(p.style,{
       width:sz+'px', height:sz+'px',
       left:(4+Math.random()*92)+'%',
       bottom:(2+Math.random()*35)+'%',
-      '--d': (7+Math.random()*9)+'s',
+      '--d':(7+Math.random()*9)+'s',
       '--dl':(Math.random()*8)+'s',
-      '--o': (0.18+Math.random()*0.38),
+      '--o':(0.18+Math.random()*0.38),
     });
     field.appendChild(p);
   }
@@ -1821,16 +1848,11 @@ const site        = document.getElementById('main-site');
 const bgm         = document.getElementById('bgm');
 
 document.getElementById('openBtn').addEventListener('click', function(){
-  /* Fade centre text */
   cc.style.transition = 'opacity 0.4s ease';
   cc.style.opacity    = '0';
-
   setTimeout(function(){
     cc.classList.add('gone');
-    /* Slide panels outward */
     curtainWrap.classList.add('open');
-
-    /* Reveal site after panels clear (1.8s transition + 0.5s delay + 200ms buffer) */
     setTimeout(function(){
       stage.classList.add('gone');
       curtainWrap.classList.add('gone');
@@ -1849,56 +1871,41 @@ document.getElementById('openBtn').addEventListener('click', function(){
 function initReveal(){
   const io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('vis');
-        io.unobserve(e.target);
-      }
+      if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); }
     });
   },{ threshold:0.11 });
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  /* S-rule grow + title shimmer triggers */
   const ruleObs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('vis');
-        ruleObs.unobserve(e.target);
-      }
+      if(e.isIntersecting){ e.target.classList.add('vis'); ruleObs.unobserve(e.target); }
     });
   },{ threshold:0.3 });
   document.querySelectorAll('.s-rule,.s-title,.s-eyebrow,.gifts-letter,.words-preamble').forEach(
     function(el){ ruleObs.observe(el); }
   );
 
-  /* Footer entrance observer */
   const footerObs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('vis');
-        footerObs.unobserve(e.target);
-      }
+      if(e.isIntersecting){ e.target.classList.add('vis'); footerObs.unobserve(e.target); }
     });
   },{ threshold:0.2 });
   const footer = document.querySelector('footer');
   if(footer) footerObs.observe(footer);
 
-  /* Cake glow after drawing finishes */
   setTimeout(function(){
     const cake = document.querySelector('.cake-wrap');
     if(cake) cake.classList.add('cake-glow');
   }, 5500);
 
-  /* Subtle mouse parallax on hero background */
   const hero = document.querySelector('.hero');
   if(hero){
     hero.addEventListener('mousemove', function(ev){
-      const rx = (ev.clientX / window.innerWidth  - 0.5) * 12;
-      const ry = (ev.clientY / window.innerHeight - 0.5) * 8;
-      hero.style.backgroundPosition = (50 + rx * 0.3) + '% ' + (50 + ry * 0.3) + '%';
+      const rx=(ev.clientX/window.innerWidth-0.5)*12;
+      const ry=(ev.clientY/window.innerHeight-0.5)*8;
+      hero.style.backgroundPosition=(50+rx*0.3)+'% '+(50+ry*0.3)+'%';
     });
-    hero.addEventListener('mouseleave', function(){
-      hero.style.backgroundPosition = '';
-    });
+    hero.addEventListener('mouseleave', function(){ hero.style.backgroundPosition=''; });
   }
 }
 
@@ -1910,8 +1917,8 @@ function initTimeline(){
   const io  = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
-        const idx = parseInt(e.target.dataset.i||'0');
-        setTimeout(function(){ e.target.classList.add('in'); }, idx * 140);
+        const idx=parseInt(e.target.dataset.i||'0');
+        setTimeout(function(){ e.target.classList.add('in'); }, idx*140);
         io.unobserve(e.target);
       }
     });
@@ -1919,35 +1926,32 @@ function initTimeline(){
   els.forEach(function(el,i){ el.dataset.i=i; io.observe(el); });
 }
 
-/* Run reveal immediately in case of no curtain interaction */
 document.addEventListener('DOMContentLoaded', function(){
   initReveal();
   initTimeline();
 });
 
 /* ══════════════════════════════════════════
-   COUNTDOWN (with tick animation)
+   COUNTDOWN
 ══════════════════════════════════════════ */
-const cdD = document.getElementById('cdD');
-const cdH = document.getElementById('cdH');
-const cdM = document.getElementById('cdM');
-const cdS = document.getElementById('cdS');
-let prevS = -1;
+const cdD=document.getElementById('cdD');
+const cdH=document.getElementById('cdH');
+const cdM=document.getElementById('cdM');
+const cdS=document.getElementById('cdS');
 
 function tick(){
-  const diff = new Date('2026-03-23T19:00:00') - new Date();
-  if(diff <= 0) return;
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor((diff%86400000)/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  const s = Math.floor((diff%60000)/1000);
-
+  const diff=new Date('2026-03-23T19:00:00')-new Date();
+  if(diff<=0) return;
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
   function set(el,val){
-    const v = String(val).padStart(2,'0');
-    if(el.textContent !== v){
-      el.textContent = v;
+    const v=String(val).padStart(2,'0');
+    if(el.textContent!==v){
+      el.textContent=v;
       el.classList.remove('tick');
-      void el.offsetWidth; /* reflow */
+      void el.offsetWidth;
       el.classList.add('tick');
     }
   }
@@ -1966,11 +1970,38 @@ function addCal(){
     '&dates=20260323T190000Z/20260323T190000Z' +
     '&location=SL+Lawns+Resort,+Badlapur', '_blank'
   );
-};
+}
 
-  
+/* ══════════════════════════════════════════
+   GALLERY LIGHTBOX
+══════════════════════════════════════════ */
+(function(){
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lbImg');
+  const lbClose = document.getElementById('lbClose');
+
+  /* Open lightbox only when a real src is provided */
+  document.querySelectorAll('.masonry-item').forEach(function(item){
+    item.addEventListener('click', function(){
+      const src = item.dataset.src;
+      if(!src) return; /* no-op while placeholder */
+      lbImg.src = src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLb(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function(){ lbImg.src=''; }, 400);
+  }
+
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target===lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+})();
 
 </script>
-
 </body>
 </html>
